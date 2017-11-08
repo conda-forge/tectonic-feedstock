@@ -7,12 +7,11 @@ package:
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
   url: https://crates.io/api/v1/crates/{{ name }}/{{ version }}/download
   sha256: {{ sha256 }}
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
 
 requirements:
@@ -26,7 +25,7 @@ requirements:
     - icu 58.*
     - libpng >=1.6.22,<1.6.31
     - openssl 1.0.*
-    - zlib 1.2.8
+    - zlib 1.2.11
   run:
     - fontconfig 2.12.*  # [not osx]
     - freetype 2.7
@@ -35,7 +34,7 @@ requirements:
     - icu 58.*
     - libpng >=1.6.22,<1.6.31
     - openssl 1.0.*
-    - zlib 1.2.8
+    - zlib 1.2.11
 
 test:
   commands:
