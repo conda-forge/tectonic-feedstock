@@ -7,6 +7,7 @@ package:
   version: {{ version }}
 
 source:
+  fn: {{ name }}-{{ version }}.tar.gz
   url: https://crates.io/api/v1/crates/{{ name }}/{{ version }}/download
   sha256: {{ sha256 }}
 
