@@ -1,6 +1,6 @@
 {% set name = "tectonic" %}
-{% set version = "0.1.6" %}
-{% set sha256 = "2d46ebb9dc11e4f92784ff0f1400c927bf19a686dfa438e95520b22b9c1cec40" %}
+{% set version = "0.1.7" %}
+{% set sha256 = "3b242413ed3b47f563406011bc14256174c4e0952d393984d54762ea8f959412" %}
 
 package:
   name: {{ name|lower }}
@@ -26,7 +26,7 @@ requirements:
     - icu 58.*
     - libpng >=1.6.22,<1.6.31
     - openssl 1.0.*
-    - zlib 1.2.8
+    - zlib 1.2.11
   run:
     - fontconfig 2.12.*  # [not osx]
     - freetype 2.7
@@ -35,7 +35,7 @@ requirements:
     - icu 58.*
     - libpng >=1.6.22,<1.6.31
     - openssl 1.0.*
-    - zlib 1.2.8
+    - zlib 1.2.11
 
 test:
   commands:
