@@ -14,14 +14,16 @@ Summary: A modernized, complete, standalone TeX/LaTeX engine.
 Current build status
 ====================
 
-Linux: [![Circle CI](https://circleci.com/gh/conda-forge/tectonic-feedstock.svg?style=shield)](https://circleci.com/gh/conda-forge/tectonic-feedstock)
-OSX: [![TravisCI](https://travis-ci.org/conda-forge/tectonic-feedstock.svg?branch=master)](https://travis-ci.org/conda-forge/tectonic-feedstock)
-Windows: ![](https://cdn.rawgit.com/conda-forge/conda-smithy/90845bba35bec53edac7a16638aa4d77217a3713/conda_smithy/static/disabled.svg)
+[![Linux](https://img.shields.io/circleci/project/github/conda-forge/tectonic-feedstock/master.svg?label=Linux)](https://circleci.com/gh/conda-forge/tectonic-feedstock)
+[![OSX](https://img.shields.io/travis/conda-forge/tectonic-feedstock/master.svg?label=macOS)](https://travis-ci.org/conda-forge/tectonic-feedstock)
+![Windows disabled](https://img.shields.io/badge/Windows-disabled-lightgrey.svg)
 
 Current release info
 ====================
-Version: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/tectonic/badges/version.svg)](https://anaconda.org/conda-forge/tectonic)
-Downloads: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/tectonic/badges/downloads.svg)](https://anaconda.org/conda-forge/tectonic)
+
+| Name | Downloads | Version | Platforms |
+| --- | --- | --- | --- |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-tectonic-green.svg)](https://anaconda.org/conda-forge/tectonic) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/tectonic.svg)](https://anaconda.org/conda-forge/tectonic) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/tectonic.svg)](https://anaconda.org/conda-forge/tectonic) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/tectonic.svg)](https://anaconda.org/conda-forge/tectonic) |
 
 Installing tectonic
 ===================
