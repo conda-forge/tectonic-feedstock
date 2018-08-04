@@ -1,1 +1,29 @@
-{}
+fontconfig:
+- '2.13'
+freetype:
+- 2.8.1
+harfbuzz:
+- '1'
+icu:
+- '58'
+libpng:
+- 1.6.34
+openssl:
+- 1.0.2
+pin_run_as_build:
+  fontconfig:
+    max_pin: x
+  freetype:
+    max_pin: x.x
+  harfbuzz:
+    max_pin: x
+  icu:
+    max_pin: x
+  libpng:
+    max_pin: x.x
+  openssl:
+    max_pin: x.x.x
+  zlib:
+    max_pin: x.x
+zlib:
+- '1.2'
