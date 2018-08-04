@@ -17,7 +17,8 @@ build:
 
 requirements:
   build:
-    - rust
+    # Later versions of rustc currently overflow their stack on Travis! :-(
+    - rust 1.26
     - pkg-config
 
   host:
