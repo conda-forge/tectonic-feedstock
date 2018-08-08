@@ -12,14 +12,17 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 2
+  number: 3
   skip: true  # [win]
 
 requirements:
+    build:
+    - pkg-config
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
   build:
     # Later versions of rustc currently overflow their stack on Travis! :-(
     - rust 1.26
-    - pkg-config
 
   host:
     - fontconfig  # [not osx]
