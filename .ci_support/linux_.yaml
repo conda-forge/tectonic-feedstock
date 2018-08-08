@@ -1,7 +1,11 @@
+c_compiler:
+- toolchain_c
+cxx_compiler:
+- toolchain_cxx
 fontconfig:
 - '2.13'
 freetype:
-- 2.8.1
+- 2.9.1
 harfbuzz:
 - '1'
 icu:
@@ -14,7 +18,7 @@ pin_run_as_build:
   fontconfig:
     max_pin: x
   freetype:
-    max_pin: x.x
+    max_pin: x
   harfbuzz:
     max_pin: x
   icu:
