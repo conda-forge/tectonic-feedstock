@@ -1,6 +1,8 @@
 {% set name = "tectonic" %}
-{% set version = "0.1.8" %}
-{% set sha256 = "ce440257d76c3a23aaa2576858b14dfa831da9c53ecbc03c57d83db163c20873" %}
+{% set version = "0.1.9" %}
+{% set sha256 = "48ae8ef5e733ea2cc0cd742013c9832403f73acb39327ff06ec746056f5a501c" %}
+{% set posix = 'm2-' if win else '' %}
+{% set native = 'm2w64-' if win else '' %}
 
 package:
   name: {{ name|lower }}
@@ -12,16 +14,16 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 3
-  skip: true  # [win]
+  number: 0
 
 requirements:
   build:
-    # Later versions of rustc currently overflow their stack on Travis! :-(
-    - rust 1.26
-    - pkg-config
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
+    - rust       # [not osx]
+    - rust 1.26  # [osx] -- later versions overflow their stack on Travis :-(
+    - {{native}}pkg-config
+    - {{ compiler('c') }}    # [not win]
+    - {{ compiler('cxx') }}  # [not win]
+    - vs2015_win-64          # [win] -- VS2008 too annoying to support
 
   host:
     - fontconfig  # [not osx]
@@ -29,7 +31,7 @@ requirements:
     - graphite2
     - harfbuzz
     - icu
-    - libpng
+    - libpng >=1.6.35  # [win] -- needed for some reason to get a package new enough to have a pkg-config file
     - openssl
     - zlib
 
