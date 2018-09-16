@@ -18,7 +18,8 @@ build:
 
 requirements:
   build:
-    - rust
+    - rust       # [not osx]
+    - rust 1.26  # [osx] -- later versions overflow their stack on Travis :-(
     - {{native}}pkg-config
     - {{ compiler('c') }}    # [not win]
     - {{ compiler('cxx') }}  # [not win]
