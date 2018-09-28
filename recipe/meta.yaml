@@ -1,6 +1,6 @@
 {% set name = "tectonic" %}
-{% set version = "0.1.9" %}
-{% set sha256 = "48ae8ef5e733ea2cc0cd742013c9832403f73acb39327ff06ec746056f5a501c" %}
+{% set version = "0.1.10" %}
+{% set sha256 = "716b3cfa2880c1c775cdc0f65b44edf2af85843adb8cfe89dadb63311fae2374" %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
