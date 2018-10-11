@@ -16,7 +16,7 @@ source:
     - msvc-M_PI.patch  # temporary for 0.1.10; should be removed on next release
 
 build:
-  number: 0
+  number: 1000
 
 requirements:
   build:
