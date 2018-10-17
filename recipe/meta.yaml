@@ -20,8 +20,7 @@ build:
 
 requirements:
   build:
-    - rust       # [not osx]
-    - rust 1.26  # [osx] -- later versions overflow their stack on Travis :-(
+    - rust
     - {{posix}}patch         # [win]
     - {{native}}pkg-config
     - {{ compiler('c') }}    # [not win]
@@ -60,7 +59,7 @@ about:
   license_family: MIT
   license_file: LICENSE
   summary: 'A modernized, complete, standalone TeX/LaTeX engine.'
-  doc_url: https://tectonic-typesetting.github.io/en-US/learn.html
+  doc_url: https://tectonic-typesetting.github.io/learn.html
   dev_url: https://github.com/tectonic-typesetting/tectonic/
 
 extra:
