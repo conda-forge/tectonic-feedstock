@@ -11,7 +11,7 @@ harfbuzz:
 icu:
 - '58'
 libpng:
-- 1.6.34
+- 1.6.35
 openssl:
 - 1.0.2
 pin_run_as_build:
