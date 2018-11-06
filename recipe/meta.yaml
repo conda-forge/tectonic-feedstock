@@ -12,8 +12,6 @@ source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://crates.io/api/v1/crates/{{ name }}/{{ version }}/download
   sha256: {{ sha256 }}
-  patches:
-    - msvc-M_PI.patch  # temporary for 0.1.10; should be removed on next release
 
 build:
   number: 1000
