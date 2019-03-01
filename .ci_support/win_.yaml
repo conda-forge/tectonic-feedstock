@@ -7,13 +7,13 @@ fontconfig:
 freetype:
 - 2.9.1
 harfbuzz:
-- '1'
+- '2'
 icu:
 - '58'
 libpng:
 - 1.6.35
 openssl:
-- 1.0.2
+- 1.1.1a
 pin_run_as_build:
   fontconfig:
     max_pin: x
