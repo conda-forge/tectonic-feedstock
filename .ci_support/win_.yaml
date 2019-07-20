@@ -9,7 +9,7 @@ freetype:
 harfbuzz:
 - '2'
 icu:
-- '58'
+- '64.2'
 libpng:
 - 1.6.35
 openssl:
