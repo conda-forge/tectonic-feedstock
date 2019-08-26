@@ -1,7 +1,3 @@
-<!--
-# -*- mode: jinja -*-
--->
-
 About tectonic
 ==============
 
@@ -18,9 +14,56 @@ Summary: A modernized, complete, standalone TeX/LaTeX engine.
 Current build status
 ====================
 
-[![Linux](https://img.shields.io/circleci/project/github/conda-forge/tectonic-feedstock/master.svg?label=Linux)](https://circleci.com/gh/conda-forge/tectonic-feedstock)
-[![OSX](https://img.shields.io/travis/conda-forge/tectonic-feedstock/master.svg?label=macOS)](https://travis-ci.org/conda-forge/tectonic-feedstock)
-[![Windows](https://img.shields.io/appveyor/ci/conda-forge/tectonic-feedstock/master.svg?label=Windows)](https://ci.appveyor.com/project/conda-forge/tectonic-feedstock/branch/master)
+
+<table><tr>
+    <td>Appveyor</td>
+    <td>
+      <a href="https://ci.appveyor.com/project/conda-forge/tectonic-feedstock/branch/master">
+        <img alt="windows" src="https://img.shields.io/appveyor/ci/conda-forge/tectonic-feedstock/master.svg?label=Windows">
+      </a>
+    </td>
+  </tr>
+    
+  <tr>
+    <td>Azure</td>
+    <td>
+      <details>
+        <summary>
+          <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=1992&branchName=master">
+            <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/tectonic-feedstock?branchName=master">
+          </a>
+        </summary>
+        <table>
+          <thead><tr><th>Variant</th><th>Status</th></tr></thead>
+          <tbody><tr>
+              <td>linux</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=1992&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/tectonic-feedstock?branchName=master&jobName=linux&configuration=linux_" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=1992&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/tectonic-feedstock?branchName=master&jobName=osx&configuration=osx_" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>win</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=1992&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/tectonic-feedstock?branchName=master&jobName=win&configuration=win_" alt="variant">
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </details>
+    </td>
+  </tr>
+![ppc64le disabled](https://img.shields.io/badge/ppc64le-disabled-lightgrey.svg)
+</table>
 
 Current release info
 ====================
