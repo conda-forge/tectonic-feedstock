@@ -15,5 +15,5 @@ else
 fi
 
 cargo build --release --verbose
-cargo install --bin tectonic --root $PREFIX
+cargo install --path . --bin tectonic --root $PREFIX
 rm -f $PREFIX/.crates.toml
