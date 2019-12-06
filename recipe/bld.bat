@@ -13,7 +13,7 @@ copy %LIBRARY_PREFIX%\lib\libxml2_a.lib %LIBRARY_PREFIX%\lib\xml2.lib
 cargo build --release --verbose
 if errorlevel 1 exit 1
 
-cargo install --bin tectonic --root %LIBRARY_PREFIX%
+cargo install --path . --bin tectonic --root %LIBRARY_PREFIX%
 if errorlevel 1 exit 1
 
 del %LIBRARY_PREFIX%\.crates.toml
