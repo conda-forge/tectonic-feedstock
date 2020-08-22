@@ -1,33 +1,41 @@
+MACOSX_DEPLOYMENT_TARGET:
+- '10.9'
+c_compiler:
+- clang
+c_compiler_version:
+- '10'
 channel_sources:
 - conda-forge,defaults
 channel_targets:
 - conda-forge main
-fontconfig:
-- '2.13'
+cxx_compiler:
+- clangxx
+cxx_compiler_version:
+- '10'
 freetype:
 - 2.9.1
 harfbuzz:
 - '2'
 icu:
 - '67'
-libpng:
-- '1.6'
+macos_machine:
+- x86_64-apple-darwin13.4.0
+macos_min_version:
+- '10.9'
 openssl:
 - 1.1.1
 pin_run_as_build:
-  fontconfig:
-    max_pin: x
   freetype:
     max_pin: x
   harfbuzz:
     max_pin: x
   icu:
     max_pin: x
-  libpng:
-    max_pin: x.x
   openssl:
     max_pin: x.x.x
   zlib:
     max_pin: x.x
+target_platform:
+- osx-64
 zlib:
 - '1.2'
