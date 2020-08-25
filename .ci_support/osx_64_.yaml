@@ -18,6 +18,8 @@ harfbuzz:
 - '2'
 icu:
 - '67'
+libpng:
+- '1.6'
 macos_machine:
 - x86_64-apple-darwin13.4.0
 macos_min_version:
@@ -31,6 +33,8 @@ pin_run_as_build:
     max_pin: x
   icu:
     max_pin: x
+  libpng:
+    max_pin: x.x
   openssl:
     max_pin: x.x.x
   zlib:
