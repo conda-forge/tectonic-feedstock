@@ -12,20 +12,17 @@ source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://crates.io/api/v1/crates/{{ name }}/{{ version }}/download
   sha256: {{ sha256 }}
-  patches:
-    - fix-format-macros.patch
 
 build:
-  number: 2
+  number: 3
 
 requirements:
   build:
     - rust
     - {{ posix }}patch         # [win]
     - {{ native }}pkg-config
-    - {{ compiler('c') }}    # [not win]
-    - {{ compiler('cxx') }}  # [not win]
-    - vs2015_win-64          # [win] -- VS2008 too annoying to support
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
 
   host:
     - fontconfig  # [not osx]
@@ -33,7 +30,7 @@ requirements:
     - graphite2
     - harfbuzz
     - icu
-    - libpng >=1.6.35  # [win] -- needed for some reason to get a package new enough to have a pkg-config file
+    - libpng
     - openssl
     - zlib
 
