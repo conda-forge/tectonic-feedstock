@@ -14,7 +14,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 3
+  number: 4
 
 requirements:
   build:
@@ -45,10 +45,13 @@ requirements:
     - zlib
 
 test:
+  files:
+    - example.tex
   commands:
     - conda inspect linkages -p $PREFIX $PKG_NAME  # [not win]
     - conda inspect objects -p $PREFIX $PKG_NAME  # [osx]
     - tectonic --help
+    - tectonic example.tex
 
 about:
   home: https://tectonic-typesetting.github.io/
