@@ -14,6 +14,7 @@ else
     export RUSTFLAGS="-C link-args=-Wl,-rpath-link,$PREFIX/lib"
 fi
 
+cargo test --release
 cargo install --path . --bin tectonic --root $PREFIX
 rm -f $PREFIX/.crates.toml
 rm -f $PREFIX/.crates2.json

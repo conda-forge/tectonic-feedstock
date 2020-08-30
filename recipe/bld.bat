@@ -5,6 +5,9 @@ set "CFLAGS=-MD -DGRAPHITE2_STATIC"
 set "CXXFLAGS=-MD -DGRAPHITE2_STATIC"
 set "PKG_CONFIG_PATH=%LIBRARY_PREFIX:\=/%/lib/pkgconfig;%LIBRARY_PREFIX:\=/%/share/pkgconfig"
 
+cargo test --release
+if errorlevel 1 exit 1
+
 cargo install --path . --bin tectonic --root %LIBRARY_PREFIX%
 if errorlevel 1 exit 1
 
