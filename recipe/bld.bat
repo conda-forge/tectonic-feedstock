@@ -6,8 +6,10 @@ set "CXXFLAGS=-MD -DGRAPHITE2_STATIC"
 set "PKG_CONFIG_PATH=%LIBRARY_PREFIX:\=/%/lib/pkgconfig;%LIBRARY_PREFIX:\=/%/share/pkgconfig"
 
 @REM Need to single-thread tests on Windows to avoid a filesystem locking issue.
+@REM Also need to skip the Unicode filename test due to conda-build issue:
+@REM  https://github.com/conda/conda-build/issues/4043
 set RUST_TEST_THREADS=1
-cargo test --release
+cargo test --release -- --skip unicode_file_name
 if errorlevel 1 exit 1
 
 cargo install --path . --bin tectonic --root %LIBRARY_PREFIX%
