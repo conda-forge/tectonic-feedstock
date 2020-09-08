@@ -1,6 +1,6 @@
 {% set name = "tectonic" %}
-{% set version = "0.1.12" %}
-{% set sha256 = "b5e11cc128f9694cf71b8f4fc9a099e464294b5b18ff3a6fdbb6e5f0cf14b572" %}
+{% set version = "0.1.14" %}
+{% set sha256 = "5e940ba1fae829c617b6c9c2098f218a62abffdf1c98d13e363ff2ed0897ca10" %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -14,7 +14,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 3
+  number: 0
 
 requirements:
   build:
@@ -45,17 +45,20 @@ requirements:
     - zlib
 
 test:
+  files:
+    - example.tex
   commands:
     - conda inspect linkages -p $PREFIX $PKG_NAME  # [not win]
     - conda inspect objects -p $PREFIX $PKG_NAME  # [osx]
     - tectonic --help
+    - tectonic example.tex
 
 about:
   home: https://tectonic-typesetting.github.io/
   license: MIT
   license_family: MIT
   license_file: LICENSE
-  summary: 'A modernized, complete, standalone TeX/LaTeX engine.'
+  summary: A modernized, complete, standalone TeX/LaTeX engine.
   doc_url: https://tectonic-typesetting.github.io/learn.html
   dev_url: https://github.com/tectonic-typesetting/tectonic/
 
