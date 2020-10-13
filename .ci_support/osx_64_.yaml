@@ -29,8 +29,6 @@ pin_run_as_build:
     max_pin: x
   harfbuzz:
     max_pin: x
-  icu:
-    max_pin: x
   libpng:
     max_pin: x.x
   openssl:
@@ -39,5 +37,8 @@ pin_run_as_build:
     max_pin: x.x
 target_platform:
 - osx-64
+zip_keys:
+- - c_compiler_version
+  - cxx_compiler_version
 zlib:
 - '1.2'

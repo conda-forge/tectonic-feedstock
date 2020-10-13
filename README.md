@@ -5,11 +5,13 @@ Home: https://tectonic-typesetting.github.io/
 
 Package license: MIT
 
-Feedstock license: BSD-3-Clause
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/tectonic-feedstock/blob/master/LICENSE.txt)
 
 Summary: A modernized, complete, standalone TeX/LaTeX engine.
 
+Development: https://github.com/tectonic-typesetting/tectonic/
 
+Documentation: https://tectonic-typesetting.github.io/learn.html
 
 Current build status
 ====================
