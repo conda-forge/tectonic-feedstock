@@ -13,7 +13,7 @@ source:
   url: https://crates.io/api/v1/crates/{{ name }}/{{ version }}/download
   sha256: {{ sha256 }}
   patches:
-    - winzip.patch # [win]
+    - winzip.patch  # [win]
 
 build:
   number: 0
