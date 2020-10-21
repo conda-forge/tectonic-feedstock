@@ -29,6 +29,7 @@ requirements:
   host:
     - fontconfig  # [not osx]
     - freetype
+    - glib  # development files needed by harfbuzz
     - graphite2
     - harfbuzz
     - icu
