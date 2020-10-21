@@ -1,6 +1,6 @@
 {% set name = "tectonic" %}
-{% set version = "0.1.17" %}
-{% set sha256 = "9a8bf2b2e63355e2fd71c79068114a933ce1acf74927c0ae5e6e16f1ad6904d0" %}
+{% set version = "0.2.0" %}
+{% set sha256 = "b6d6663cec20c5d46263cc1b49c479fddb1dd4cbe255fec63f96ee45496c4b0b" %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -29,6 +29,7 @@ requirements:
   host:
     - fontconfig  # [not osx]
     - freetype
+    - glib  # development files needed by harfbuzz
     - graphite2
     - harfbuzz
     - icu

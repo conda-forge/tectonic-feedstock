@@ -2,6 +2,8 @@ c_compiler:
 - gcc
 c_compiler_version:
 - '7'
+cdt_name:
+- cos6
 channel_sources:
 - conda-forge,defaults
 channel_targets:
@@ -16,6 +18,8 @@ fontconfig:
 - '2.13'
 freetype:
 - 2.9.1
+glib:
+- '2.58'
 harfbuzz:
 - '2'
 icu:
