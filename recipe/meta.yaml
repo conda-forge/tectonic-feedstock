@@ -14,6 +14,7 @@ source:
   sha256: {{ sha256 }}
   patches:
     - winzip.patch  # [win]
+    - EXPERIMENTS.patch
 
 build:
   number: 0

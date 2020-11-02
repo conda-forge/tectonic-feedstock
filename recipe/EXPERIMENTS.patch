@@ -1,0 +1,14 @@
+diff --git a/tectonic/xetex-texmfmp.c b/tectonic/xetex-texmfmp.c
+index e345187..3d3631a 100644
+--- a/tectonic/xetex-texmfmp.c
++++ b/tectonic/xetex-texmfmp.c
+@@ -10,7 +10,9 @@
+ #include "xetex-ext.h"
+ 
+ #include <time.h> /* For `struct tm'.  Moved here for Visual Studio 2005.  */
++#ifndef _MSC_VER
+ #include <sys/time.h>
++#endif
+ 
+ static char *last_source_name = NULL;
+ static int last_lineno;
