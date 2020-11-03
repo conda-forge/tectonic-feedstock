@@ -9,7 +9,7 @@ cxx_compiler:
 fontconfig:
 - '2.13'
 freetype:
-- 2.9.1
+- '2'
 glib:
 - 2.64.6
 harfbuzz:
