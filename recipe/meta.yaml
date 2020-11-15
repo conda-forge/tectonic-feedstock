@@ -1,6 +1,6 @@
 {% set name = "tectonic" %}
-{% set version = "0.3.1" %}
-{% set sha256 = "53e12bc1c50c2fe656b3bde8abae913f52b8339d93bf78ff6ae16517c6c01d90" %}
+{% set version = "0.3.2" %}
+{% set sha256 = "6a3c9c37ed18aff1e1ef411ac16719ca89d2fe0dc93004218002562045f7298d" %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -51,8 +51,6 @@ test:
   files:
     - example.tex
   commands:
-    - conda inspect linkages -p $PREFIX $PKG_NAME  # [not win]
-    - conda inspect objects -p $PREFIX $PKG_NAME  # [osx]
     - tectonic --help
     - tectonic example.tex
 
