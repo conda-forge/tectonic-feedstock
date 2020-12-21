@@ -15,11 +15,11 @@ cxx_compiler_version:
 freetype:
 - '2'
 glib:
-- 2.64.6
+- '2.66'
 harfbuzz:
 - '2'
 icu:
-- '67'
+- '68'
 libpng:
 - '1.6'
 macos_machine:
