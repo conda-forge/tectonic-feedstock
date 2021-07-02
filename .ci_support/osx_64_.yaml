@@ -15,7 +15,7 @@ cxx_compiler_version:
 freetype:
 - '2'
 glib:
-- '2.66'
+- '2'
 harfbuzz:
 - '2'
 icu:
@@ -37,6 +37,8 @@ pin_run_as_build:
     max_pin: x.x.x
   zlib:
     max_pin: x.x
+rust:
+- '1.46'
 target_platform:
 - osx-64
 zip_keys:
