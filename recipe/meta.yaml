@@ -1,6 +1,6 @@
 {% set name = "tectonic" %}
-{% set version = "0.4.1" %}
-{% set sha256 = "8e122651c61e35ab400926efc5a82eab4517325cc0fd1c6bf3f947b7dd12d599" %}
+{% set version = "0.7.1" %}
+{% set sha256 = "1a6bc21d0c744d8e318e47218612f2c7add22a730a0b8ddbb52aa0aa56755366" %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -60,7 +60,7 @@ about:
   license_family: MIT
   license_file: LICENSE
   summary: A modernized, complete, standalone TeX/LaTeX engine.
-  doc_url: https://tectonic-typesetting.github.io/learn.html
+  doc_url: https://tectonic-typesetting.github.io/book/latest/
   dev_url: https://github.com/tectonic-typesetting/tectonic/
 
 extra:
