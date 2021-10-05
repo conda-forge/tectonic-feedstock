@@ -11,7 +11,7 @@ Summary: A modernized, complete, standalone TeX/LaTeX engine.
 
 Development: https://github.com/tectonic-typesetting/tectonic/
 
-Documentation: https://tectonic-typesetting.github.io/learn.html
+Documentation: https://tectonic-typesetting.github.io/book/latest/
 
 Current build status
 ====================
