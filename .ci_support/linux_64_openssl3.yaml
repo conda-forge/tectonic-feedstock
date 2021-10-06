@@ -1,0 +1,50 @@
+c_compiler:
+- gcc
+c_compiler_version:
+- '9'
+cdt_name:
+- cos6
+channel_sources:
+- conda-forge
+channel_targets:
+- conda-forge main
+cxx_compiler:
+- gxx
+cxx_compiler_version:
+- '9'
+docker_image:
+- quay.io/condaforge/linux-anvil-comp7
+fontconfig:
+- '2.13'
+freetype:
+- '2'
+glib:
+- '2'
+harfbuzz:
+- '3'
+icu:
+- '68'
+libpng:
+- '1.6'
+openssl:
+- '3'
+pin_run_as_build:
+  fontconfig:
+    max_pin: x
+  freetype:
+    max_pin: x
+  harfbuzz:
+    max_pin: x
+  libpng:
+    max_pin: x.x
+  zlib:
+    max_pin: x.x
+target_platform:
+- linux-64
+zip_keys:
+- - c_compiler_version
+  - cxx_compiler_version
+- - cdt_name
+  - docker_image
+zlib:
+- '1.2'

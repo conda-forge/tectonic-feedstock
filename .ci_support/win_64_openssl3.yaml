@@ -1,0 +1,37 @@
+c_compiler:
+- vs2017
+channel_sources:
+- conda-forge
+channel_targets:
+- conda-forge main
+cxx_compiler:
+- vs2017
+fontconfig:
+- '2.13'
+freetype:
+- '2'
+glib:
+- '2'
+harfbuzz:
+- '3'
+icu:
+- '68'
+libpng:
+- '1.6'
+openssl:
+- '3'
+pin_run_as_build:
+  fontconfig:
+    max_pin: x
+  freetype:
+    max_pin: x
+  harfbuzz:
+    max_pin: x
+  libpng:
+    max_pin: x.x
+  zlib:
+    max_pin: x.x
+target_platform:
+- win-64
+zlib:
+- '1.2'
