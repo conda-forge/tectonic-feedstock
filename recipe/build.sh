@@ -2,6 +2,8 @@
 
 set -ex
 
+export PKG_CONFIG_ALLOW_CROSS=1
+
 if [ $(uname) = Darwin ] ; then
     export CXXFLAGS="-arch $OSX_ARCH -stdlib=libc++ -std=c++11"
     export RUSTFLAGS="-C link-args=-Wl,-rpath,$PREFIX/lib"
