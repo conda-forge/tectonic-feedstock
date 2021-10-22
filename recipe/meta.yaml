@@ -16,15 +16,17 @@ source:
     - winzip.patch  # [win]
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
-    - rust
+    - {{ compiler('rust') }}
     - {{ posix }}patch         # [win]
     - {{ native }}pkg-config
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - glib       # [build_platform != target_platform]
+    - harfbuzz   # [build_platform != target_platform]
 
   host:
     - fontconfig  # [not osx]

@@ -35,6 +35,8 @@ pin_run_as_build:
     max_pin: x.x
   zlib:
     max_pin: x.x
+rust_compiler:
+- rust
 target_platform:
 - osx-64
 zip_keys:
