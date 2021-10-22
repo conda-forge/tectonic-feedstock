@@ -13,12 +13,17 @@ if [ $(uname) = Darwin ] ; then
     # this seems not to work. From local investigation it *seems* that the
     # environment variables are not responsible, but I'm not sure exactly how
     # cargo is deciding if/when rebuilds are needed.
-    DYLD_FALLBACK_LIBRARY_PATH=$PREFIX/lib RUSTDOCFLAGS="-C linker=$CC" cargo test --release
+
+    if [[ "${CONDA_BUILD_CROSS_COMPILATION}" != "1" ]]; then
+        DYLD_FALLBACK_LIBRARY_PATH=$PREFIX/lib RUSTDOCFLAGS="-C linker=$CC" cargo test --release
+    fi
 else
     export CFLAGS="-std=gnu99 $CFLAGS"
     export RUSTFLAGS="-C link-args=-Wl,-rpath-link,$PREFIX/lib"
 
-    LD_LIBRARY_PATH=$PREFIX/lib RUSTDOCFLAGS="-C linker=$CC" cargo test --release
+    if [[ "${CONDA_BUILD_CROSS_COMPILATION}" != "1" ]]; then
+        LD_LIBRARY_PATH=$PREFIX/lib RUSTDOCFLAGS="-C linker=$CC" cargo test --release
+    fi
 fi
 
 
