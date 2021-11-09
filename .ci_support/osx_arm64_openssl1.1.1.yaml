@@ -19,7 +19,7 @@ glib:
 harfbuzz:
 - '3'
 icu:
-- '68'
+- '69'
 libpng:
 - '1.6'
 macos_machine:
