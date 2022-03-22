@@ -26,7 +26,7 @@ else
     fi
 fi
 
-
+cargo-bundle-licenses --format yaml --output THIRDPARTY.yml
 cargo install --path . --bin tectonic --root $PREFIX
 rm -f $PREFIX/.crates.toml
 rm -f $PREFIX/.crates2.json

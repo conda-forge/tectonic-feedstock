@@ -5,8 +5,10 @@ set "CFLAGS=-MD -DGRAPHITE2_STATIC"
 set "CXXFLAGS=-MD -DGRAPHITE2_STATIC"
 set "PKG_CONFIG_PATH=%LIBRARY_PREFIX:\=/%/lib/pkgconfig;%LIBRARY_PREFIX:\=/%/share/pkgconfig"
 
-# FIX UP LIBZ-SYS
+@REM FIX UP LIBZ-SYS
 cargo update
+
+cargo-bundle-licenses --format yaml --output THIRDPARTY.yml
 
 @REM Need to single-thread tests on Windows to avoid a filesystem locking issue.
 @REM Also need to skip the Unicode filename test due to conda-build issue:
