@@ -16,7 +16,7 @@ source:
     - winzip.patch  # [win]
 
 build:
-  number: 2
+  number: 3
 
 requirements:
   build:
