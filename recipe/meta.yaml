@@ -1,6 +1,6 @@
 {% set name = "tectonic" %}
-{% set version = "0.8.2" %}
-{% set sha256 = "6a2e91a0abb245db5056485243af25d3755e92e7325b57eccccbaba10e423b10" %}
+{% set version = "0.9.0" %}
+{% set sha256 = "da34290bd718a1a02b1c0862820f94c397363f77bfc99dd36257c634c3db0756" %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -16,7 +16,7 @@ source:
     - winzip.patch  # [win]
 
 build:
-  number: 3
+  number: 0
 
 requirements:
   build:
