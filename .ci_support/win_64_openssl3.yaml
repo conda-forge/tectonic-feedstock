@@ -1,13 +1,13 @@
 c_compiler:
-- vs2017
+- vs2019
 channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- vs2017
+- vs2019
 fontconfig:
-- '2.13'
+- '2'
 freetype:
 - '2'
 glib:
@@ -20,17 +20,6 @@ libpng:
 - '1.6'
 openssl:
 - '3'
-pin_run_as_build:
-  fontconfig:
-    max_pin: x
-  freetype:
-    max_pin: x
-  harfbuzz:
-    max_pin: x
-  libpng:
-    max_pin: x.x
-  zlib:
-    max_pin: x.x
 rust_compiler:
 - rust
 target_platform:
