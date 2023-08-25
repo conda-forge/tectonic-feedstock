@@ -4,6 +4,9 @@ set -ex
 
 export PKG_CONFIG_ALLOW_CROSS=1
 
+# https://github.com/rust-lang/cargo/issues/10583#issuecomment-1129997984
+export CARGO_NET_GIT_FETCH_WITH_CLI=true
+
 if [ $(uname) = Darwin ] ; then
     export CXXFLAGS="-arch $OSX_ARCH -stdlib=libc++ -std=c++11"
     export RUSTFLAGS="-C link-args=-Wl,-rpath,$PREFIX/lib"
