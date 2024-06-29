@@ -16,7 +16,7 @@ source:
     - winzip.patch  # [win]
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -24,6 +24,7 @@ requirements:
     - {{ posix }}patch         # [win]
     - {{ native }}pkg-config
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
     - cargo-bundle-licenses
     - glib       # [build_platform != target_platform]
@@ -41,7 +42,6 @@ requirements:
     - zlib
 
   run:
-    - __osx >={{ MACOSX_DEPLOYMENT_TARGET|default("10.12") }}  # [osx and x86_64]
     - fontconfig  # [not osx]
     - freetype
     - graphite2
