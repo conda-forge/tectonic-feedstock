@@ -1,5 +1,7 @@
 c_compiler:
 - vs2019
+c_stdlib:
+- vs
 channel_sources:
 - conda-forge
 channel_targets:
@@ -13,9 +15,9 @@ freetype:
 glib:
 - '2'
 harfbuzz:
-- '8'
+- '9'
 icu:
-- '73'
+- '75'
 libpng:
 - '1.6'
 openssl:
@@ -25,4 +27,4 @@ rust_compiler:
 target_platform:
 - win-64
 zlib:
-- '1.2'
+- '1'
