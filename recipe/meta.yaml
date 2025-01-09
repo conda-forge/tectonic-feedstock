@@ -1,6 +1,6 @@
 {% set name = "tectonic" %}
 {% set version = "0.15.0" %}
-{% set sha256 = "fe58806e4ffc54487f40b91da4cbd46717807937e33e2fc830fcfef7e023ab39" %}
+{% set sha256 = "3c13de312c4fe39ff905ad17e64a15a3a59d33ab65dacb0a8b9482c57e6bc6aa" %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -10,9 +10,10 @@ package:
 
 source:
   fn: {{ name }}-{{ version }}.tar.gz
-  url: https://crates.io/api/v1/crates/{{ name }}/{{ version }}/download
+  url: https://github.com/tectonic-typesetting/{{ name }}/archive/refs/tags/{{ name }}@{{ version }}.tar.gz
   sha256: {{ sha256 }}
   patches:
+    - pr-1202-fix-use-cxx-17.patch
     - winzip.patch  # [win]
 
 build:
@@ -31,6 +32,7 @@ requirements:
     - harfbuzz   # [build_platform != target_platform]
 
   host:
+    - expat  # [not osx]
     - fontconfig  # [not osx]
     - freetype
     - glib  # development files needed by harfbuzz
@@ -72,3 +74,4 @@ about:
 extra:
   recipe-maintainers:
     - pkgw
+    - anjos

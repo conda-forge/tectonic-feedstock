@@ -1,0 +1,343 @@
+diff --git a/Cargo.lock b/Cargo.lock
+index db797783..490846c4 100644
+--- a/Cargo.lock
++++ b/Cargo.lock
+@@ -2359,6 +2359,7 @@ dependencies = [
+  "tectonic_xetex_layout",
+  "tempfile",
+  "termcolor",
++ "time",
+  "tokio",
+  "toml",
+  "url",
+@@ -2682,9 +2683,9 @@ dependencies = [
+
+ [[package]]
+ name = "time"
+-version = "0.3.34"
++version = "0.3.36"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "c8248b6521bb14bc45b4067159b9b6ad792e2d6d754d6c41fb50e29fefe38749"
++checksum = "5dfd88e563464686c916c7e46e623e520ddc6d79fa6641390f2e3fa86e83e885"
+ dependencies = [
+  "deranged",
+  "itoa",
+@@ -2705,9 +2706,9 @@ checksum = "ef927ca75afb808a4d64dd374f00a2adf8d0fcff8e7b184af886c3c87ec4a3f3"
+
+ [[package]]
+ name = "time-macros"
+-version = "0.2.17"
++version = "0.2.18"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "7ba3a3ef41e6672a2f0f001392bb5dcd3ff0a9992d618ca761a11c3121547774"
++checksum = "3f252a68540fde3a3877aeea552b832b40ab9a69e318efd078774a01ddee1ccf"
+ dependencies = [
+  "num-conv",
+  "time-core",
+diff --git a/Cargo.toml b/Cargo.toml
+index 2bfb0c11..8f136eb7 100644
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -27,6 +27,9 @@ license = "MIT"
+ edition = "2018"
+ exclude = ["/dist/", "/reference_sources/"]
+
++[lints.rust]
++unexpected_cfgs = { level = "warn", check-cfg = ['cfg(backtrace)'] }
++
+ [badges]
+ travis-ci = { repository = "tectonic-typesetting/tectonic" }
+ codecov = { repository = "tectonic-typesetting/tectonic", service = "github" }
+@@ -75,19 +78,19 @@ quick-xml = "^0.28"
+ serde = { version = "^1.0", features = ["derive"], optional = true }
+ sha2 = "^0.10"
+ structopt = "0.3"
+-tectonic_bridge_core = { path = "crates/bridge_core", version =">=0.4.0,<1"}
+-tectonic_bundles = { path = "crates/bundles", version =">=0.3.0,<1", default-features = false }
+-tectonic_docmodel = { path = "crates/docmodel", version =">=0.2.0,<1", optional = true }
+-tectonic_engine_bibtex = { path = "crates/engine_bibtex", version =">=0.1.0,<1"}
+-tectonic_engine_spx2html = { path = "crates/engine_spx2html", version =">=0.3.0,<1"}
+-tectonic_engine_xdvipdfmx = { path = "crates/engine_xdvipdfmx", version =">=0.3.0,<1"}
+-tectonic_engine_xetex = { path = "crates/engine_xetex", version =">=0.4.0,<1"}
+-tectonic_errors = { path = "crates/errors", version =">=0.1.0,<1"}
+-tectonic_geturl = { path = "crates/geturl", version =">=0.3.0,<1", default-features = false }
+-tectonic_io_base = { path = "crates/io_base", version =">=0.3.0,<1"}
+-tectonic_status_base = { path = "crates/status_base", version =">=0.1.0,<1"}
+-tectonic_xdv = { path = "crates/xdv", version =">=0.1.9,<1"}
+-tectonic_xetex_layout = { path = "crates/xetex_layout", version =">=0.1.0,<1"}
++tectonic_bridge_core = { path = "crates/bridge_core", version = ">=0.4.0,<1" }
++tectonic_bundles = { path = "crates/bundles", version = ">=0.3.0,<1", default-features = false }
++tectonic_docmodel = { path = "crates/docmodel", version = ">=0.2.0,<1", optional = true }
++tectonic_engine_bibtex = { path = "crates/engine_bibtex", version = ">=0.1.0,<1" }
++tectonic_engine_spx2html = { path = "crates/engine_spx2html", version = ">=0.3.0,<1" }
++tectonic_engine_xdvipdfmx = { path = "crates/engine_xdvipdfmx", version = ">=0.3.0,<1" }
++tectonic_engine_xetex = { path = "crates/engine_xetex", version = ">=0.4.0,<1" }
++tectonic_errors = { path = "crates/errors", version = ">=0.1.0,<1" }
++tectonic_geturl = { path = "crates/geturl", version = ">=0.3.0,<1", default-features = false }
++tectonic_io_base = { path = "crates/io_base", version = ">=0.3.0,<1" }
++tectonic_status_base = { path = "crates/status_base", version = ">=0.1.0,<1" }
++tectonic_xdv = { path = "crates/xdv", version = ">=0.1.9,<1" }
++tectonic_xetex_layout = { path = "crates/xetex_layout", version = ">=0.1.0,<1" }
+ tempfile = "^3.1"
+ termcolor = "^1.1"
+ tokio = "^1.0"
+@@ -97,6 +100,7 @@ watchexec = "^2.3.0"
+ watchexec-filterer-globset = "1.2"
+ watchexec-signals = "1.0"
+ zip = { version = "^0.6", default-features = false, features = ["deflate"] }
++time = "0.3.36"
+
+ [features]
+ default = ["geturl-reqwest", "serialization"]
+diff --git a/crates/bundles/src/cache.rs b/crates/bundles/src/cache.rs
+index 0c481b0d..4b363d84 100644
+--- a/crates/bundles/src/cache.rs
++++ b/crates/bundles/src/cache.rs
+@@ -460,7 +460,7 @@ impl<CB: CacheBackend> CachingBundle<CB> {
+         // If a filename contains newline characters, it will mess up our
+         // line-based manifest format. Be paranoid and refuse to record such
+         // filenames.
+-        if !name.contains(|c| c == '\n' || c == '\r') {
++        if !name.contains(['\n', '\r']) {
+             writeln!(man, "{name} {length} {digest_text}")?;
+         }
+
+@@ -515,9 +515,7 @@ impl<CB: CacheBackend> CachingBundle<CB> {
+             // giving incorrect results if we pulled files out of the cache
+             // before this invocation. Rewrite the digest file so that next time
+             // we'll start afresh, then bail.
+-            file_create_write(&self.digest_path, |f| {
+-                writeln!(f, "{}", pull_data.digest.to_string())
+-            })?;
++            file_create_write(&self.digest_path, |f| writeln!(f, "{}", pull_data.digest))?;
+             bail!("backend digest changed; rerun tectonic to use updated information");
+         }
+
+diff --git a/crates/docmodel/src/document.rs b/crates/docmodel/src/document.rs
+index b91b95a1..16dc4038 100644
+--- a/crates/docmodel/src/document.rs
++++ b/crates/docmodel/src/document.rs
+@@ -270,7 +270,7 @@ impl Document {
+                 tried_src_path = true;
+
+                 if let Some(s) = t.to_str() {
+-                    name = s.to_owned();
++                    s.clone_into(&mut name);
+                 }
+             }
+
+@@ -280,7 +280,7 @@ impl Document {
+
+                     if let Some(Component::Normal(t)) = full_path.components().next_back() {
+                         if let Some(s) = t.to_str() {
+-                            name = s.to_owned();
++                            s.clone_into(&mut name);
+                         }
+                     }
+                 }
+diff --git a/crates/engine_spx2html/src/assets.rs b/crates/engine_spx2html/src/assets.rs
+index edd08ed6..21f73a74 100644
+--- a/crates/engine_spx2html/src/assets.rs
++++ b/crates/engine_spx2html/src/assets.rs
+@@ -179,7 +179,7 @@ pub(crate) fn create_output_path(
+
+     for piece in dest_path.split('/') {
+         if let Some(out_path) = out_path.as_mut() {
+-            match std::fs::create_dir(&out_path) {
++            match std::fs::create_dir(out_path.as_path()) {
+                 Ok(_) => {}
+                 Err(e) if e.kind() == std::io::ErrorKind::AlreadyExists => {}
+                 Err(e) => {
+diff --git a/crates/engine_spx2html/src/fontfile.rs b/crates/engine_spx2html/src/fontfile.rs
+index 8455f06b..65289b10 100644
+--- a/crates/engine_spx2html/src/fontfile.rs
++++ b/crates/engine_spx2html/src/fontfile.rs
+@@ -426,9 +426,10 @@ impl FontFileData {
+
+         if let Some(out_path) = out_path.as_mut() {
+             out_path.push(rel_path);
++            let display_path = out_path.clone();
+             atry!(
+-                std::fs::write(&out_path, &self.buffer);
+-                ["cannot write output file `{}`", out_path.display()]
++                std::fs::write(out_path, &self.buffer);
++                ["cannot write output file `{}`", display_path.display()]
+             );
+         }
+
+@@ -490,9 +491,10 @@ impl FontFileData {
+
+                 out_path.pop();
+                 out_path.push(&varname);
++                let display_path = out_path.clone();
+                 atry!(
+-                    std::fs::write(&out_path, &buffer);
+-                    ["cannot write output file `{}`", out_path.display()]
++                    std::fs::write(out_path, &buffer);
++                    ["cannot write output file `{}`", display_path.display()]
+                 );
+             }
+
+diff --git a/crates/engine_spx2html/src/fonts.rs b/crates/engine_spx2html/src/fonts.rs
+index a826700b..e57c383c 100644
+--- a/crates/engine_spx2html/src/fonts.rs
++++ b/crates/engine_spx2html/src/fonts.rs
+@@ -197,13 +197,13 @@ impl FontEnsemble {
+         // Update the info records for the relevant fonts to capture the
+         // established relationship.
+
+-        self.font_files[regular].family_name = name.clone();
++        self.font_files[regular].family_name.clone_from(&name);
+         self.font_files[regular].family_relation = FamilyRelativeFontId::Regular;
+-        self.font_files[bold].family_name = name.clone();
++        self.font_files[bold].family_name.clone_from(&name);
+         self.font_files[bold].family_relation = FamilyRelativeFontId::Bold;
+-        self.font_files[italic].family_name = name.clone();
++        self.font_files[italic].family_name.clone_from(&name);
+         self.font_files[italic].family_relation = FamilyRelativeFontId::Italic;
+-        self.font_files[bold_italic].family_name = name.clone();
++        self.font_files[bold_italic].family_name.clone_from(&name);
+         self.font_files[bold_italic].family_relation = FamilyRelativeFontId::BoldItalic;
+
+         self.font_families.insert(
+diff --git a/crates/engine_spx2html/src/initialization.rs b/crates/engine_spx2html/src/initialization.rs
+index 1ec38ce3..f56508ff 100644
+--- a/crates/engine_spx2html/src/initialization.rs
++++ b/crates/engine_spx2html/src/initialization.rs
+@@ -167,12 +167,12 @@ impl InitializationState {
+     }
+
+     fn handle_set_template(&mut self, texpath: &str, _common: &mut Common) -> Result<()> {
+-        self.next_template_path = texpath.to_owned();
++        texpath.clone_into(&mut self.next_template_path);
+         Ok(())
+     }
+
+     fn handle_set_output_path(&mut self, texpath: &str, _common: &mut Common) -> Result<()> {
+-        self.next_output_path = texpath.to_owned();
++        texpath.clone_into(&mut self.next_output_path);
+         Ok(())
+     }
+
+diff --git a/crates/engine_xetex/build.rs b/crates/engine_xetex/build.rs
+index 992b3511..a34282b4 100644
+--- a/crates/engine_xetex/build.rs
++++ b/crates/engine_xetex/build.rs
+@@ -25,6 +25,7 @@ fn main() {
+     let profile_target_requires_frame_pointer: bool =
+         target_cfg!(not(all(target_os = "linux", target_arch = "x86_64")));
+
++    #[allow(unexpected_cfgs)]
+     const PROFILE_BUILD_ENABLED: bool = cfg!(feature = "profile");
+
+     let profile_config = |cfg: &mut cc::Build| {
+diff --git a/crates/io_base/src/digest.rs b/crates/io_base/src/digest.rs
+index c0928dca..77672a6f 100644
+--- a/crates/io_base/src/digest.rs
++++ b/crates/io_base/src/digest.rs
+@@ -4,7 +4,7 @@
+ //! Helpers to tidy up the computation of digests in various places.
+
+ use std::{
+-    fs,
++    fmt, fs,
+     path::{Path, PathBuf},
+     str::FromStr,
+     string::ToString,
+@@ -104,9 +104,9 @@ impl DigestData {
+     }
+ }
+
+-impl ToString for DigestData {
+-    fn to_string(&self) -> String {
+-        bytes_to_hex(&self.0)
++impl fmt::Display for DigestData {
++    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
++        write!(f, "{}", bytes_to_hex(&self.0))
+     }
+ }
+
+diff --git a/crates/xdv/src/lib.rs b/crates/xdv/src/lib.rs
+index 4acfb526..1c0f2882 100644
+--- a/crates/xdv/src/lib.rs
++++ b/crates/xdv/src/lib.rs
+@@ -1229,7 +1229,7 @@ impl<'a, T: XdvEvents> Cursor<'a, T> {
+             return Err(InternalError::NeedMoreData);
+         }
+
+-        let rv = unsafe { mem::transmute(self.buf[0]) };
++        let rv = unsafe { mem::transmute::<u8, i8>(self.buf[0]) };
+         self.buf = &self.buf[1..];
+         self.offset += 1;
+         Ok(rv)
+diff --git a/crates/xetex_layout/build.rs b/crates/xetex_layout/build.rs
+index bdd0d03f..558fd29e 100644
+--- a/crates/xetex_layout/build.rs
++++ b/crates/xetex_layout/build.rs
+@@ -86,7 +86,7 @@ fn main() {
+     let mut cppcfg = cc::Build::new();
+
+     let cppflags = [
+-        "-std=c++14",
++        "-std=c++17",
+         "-Wall",
+         "-Wdate-time",
+         "-Wendif-labels",
+diff --git a/src/driver.rs b/src/driver.rs
+index 504acd28..b9041c16 100644
+--- a/src/driver.rs
++++ b/src/driver.rs
+@@ -1132,7 +1132,7 @@ impl ProcessingSessionBuilder {
+                     }
+                 };
+
+-                filesystem_root = parent.clone();
++                filesystem_root.clone_from(&parent);
+                 let pio: Box<dyn IoProvider> = Box::new(FilesystemPrimaryInputIo::new(&p));
+                 (pio, Some(p), parent)
+             }
+diff --git a/src/io/format_cache.rs b/src/io/format_cache.rs
+index dbb4e182..2b02fe1f 100644
+--- a/src/io/format_cache.rs
++++ b/src/io/format_cache.rs
+@@ -55,7 +55,7 @@ impl FormatCache {
+         let mut p = self.formats_base.clone();
+         p.push(format!(
+             "{}-{}-{}.fmt",
+-            self.bundle_digest.to_string(),
++            self.bundle_digest,
+             stem,
+             crate::FORMAT_SERIAL
+         ));
+diff --git a/tests/formats.rs b/tests/formats.rs
+index 75682ccb..d55d1793 100644
+--- a/tests/formats.rs
++++ b/tests/formats.rs
+@@ -177,12 +177,8 @@ fn test_format_generation(texname: &str, fmtname: &str, sha256: &str) {
+             let observed = info.write_digest.unwrap();
+
+             if observed != want_digest {
+-                println!(
+-                    "expected {} to have SHA256 = {}",
+-                    fmtname,
+-                    want_digest.to_string()
+-                );
+-                println!("instead, got {}", observed.to_string());
++                println!("expected {} to have SHA256 = {}", fmtname, want_digest);
++                println!("instead, got {}", observed);
+                 panic!();
+             }
+         }
+diff --git a/tests/util/mod.rs b/tests/util/mod.rs
+index 711a27e0..eb64bfd0 100644
+--- a/tests/util/mod.rs
++++ b/tests/util/mod.rs
+@@ -169,7 +169,7 @@ impl<'a> ExpectedFile<'a> {
+         pbase.set_extension(extension);
+         let name = pbase.file_name().unwrap().to_str().unwrap().to_owned();
+
+-        let mut dec = GzDecoder::new(File::open(&pbase).unwrap());
++        let mut dec = GzDecoder::new(File::open(pbase.as_path()).unwrap());
+         let mut contents = Vec::new();
+         dec.read_to_end(&mut contents).unwrap();
+
