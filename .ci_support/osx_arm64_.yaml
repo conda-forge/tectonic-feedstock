@@ -23,7 +23,7 @@ freetype:
 glib:
 - '2'
 harfbuzz:
-- '9'
+- '10'
 icu:
 - '75'
 libpng:
