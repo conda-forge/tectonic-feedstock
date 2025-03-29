@@ -11,3 +11,5 @@ provider:
   linux_ppc64le: azure
   win: azure
 test: native_and_emulated
+bot:
+  automerge: true
