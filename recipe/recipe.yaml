@@ -1,7 +1,7 @@
 context:
   name: tectonic
-  version: "0.16.9"
-  sha256: 9861d4d4230b987d8560f1b84fe6c8a550738401be65b9425b0c7d0466178f2b
+  version: "0.17.0"
+  sha256: 30adda98f67dd5389844f6023adeeb54b5475c17a54b777900644468fbc9765d
 
 package:
   name: ${{ name|lower }}
@@ -68,8 +68,7 @@ tests:
           # "error: App data directories not supported". This also triggers some
           # errors in bld.bat but they're not fatal.
           - SET "USERPROFILE=%HOMEDRIVE%%HOMEPATH%" & tectonic example.tex
-        else:
-          tectonic example.tex
+        else: tectonic example.tex
 
 about:
   license: MIT
