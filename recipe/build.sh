@@ -30,6 +30,9 @@ else
 
 fi
 
+# see https://github.com/conda-forge/conda-forge.github.io/issues/2967
+cargo update webpki-root-certs rustls-webpki
+
 cargo-bundle-licenses --format yaml --output THIRDPARTY.yml
 cargo install --no-track --locked --path . --bin tectonic --root $PREFIX --features external-harfbuzz
 rm -f $PREFIX/.crates.toml
